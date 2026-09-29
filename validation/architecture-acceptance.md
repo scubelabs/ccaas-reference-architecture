@@ -52,3 +52,7 @@ For detailed skill/proficiency/attribute routing, transfer, conference and leg-f
 | Usage/entitlement | leg-level correction, transfer/conference reconciliation, quota transition and billing dispute trace |
 
 The [build sequence](../implementation/build-sequence.md) orders these gates. Capability coverage is not evidence of implementation.
+
+# External voice adapter acceptance
+
+For every enabled external voice route, verify authenticated callback/WebSocket ingress, duplicate and out-of-order delivery, instruction deadline, ambiguous originate/transfer result reconciliation, stream gap and disconnect behavior, codec and bidirectional playback where used, consent-gated recording completeness, provider/local leg mapping, accurate queue/reservation/assignment metrics and call teardown. Test new-call routing under provider outage separately from established-call survival; do not infer one from the other. The [adapter design](../architecture/programmable-voice-adapters.md) defines the intended boundary.

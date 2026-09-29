@@ -18,6 +18,8 @@ flowchart LR
 
 The actual ability to fail inbound traffic between carriers depends on number ownership, routing/porting model, carrier capabilities, regulatory constraints, and provisioning. The architecture must not assume that configuring a second SIP trunk automatically makes every DID reachable through it.
 
+An inbound number can also terminate on an external programmable voice application instead of a SIP trunk. Its webhook/instruction endpoint and optional WebSocket media stream form a separate path with different leg-control and failure semantics. The [adapter boundary](programmable-voice-adapters.md) defines how it enters the same interaction and ACD domains; a second API route does not automatically make the DID portable or an established call recoverable.
+
 ## Outbound selection
 
 A conceptual policy can filter and rank routes using destination eligibility, regulatory/emergency requirements, carrier health, trunk capacity, CPS/concurrency headroom, cost policy, quality, and tenant/business policy.

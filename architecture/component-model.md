@@ -78,6 +78,8 @@ The same service may participate in several planes, but every write has one auth
 
 A possible voice mapping is Kamailio-class proxy, FreeSWITCH-class B2BUA/media, RTPengine-class relay, coturn-class TURN, durable relational records, low-latency coordination store and append-only event log. These are **implementation examples**, not interchangeable equivalents. Product and version selection, licenses, protocol interoperability, media benchmarks and operational ownership require proof. Keep media regional; place stateless APIs across failure domains; make queue/reservation authority explicit; isolate reporting query capacity from live routing.
 
+An [external programmable voice or media-stream adapter](programmable-voice-adapters.md) may own provider-side call legs and/or observe/send audio through a WebSocket. It does not own routing, reservations or canonical interaction history. Track per-route control and recording authority explicitly.
+
 ## Adjacent platform capabilities
 
 | Logical service | Boundary and authority |

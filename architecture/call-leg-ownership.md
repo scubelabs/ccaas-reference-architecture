@@ -18,6 +18,8 @@ flowchart LR
 
 **Alternative:** endpoint-managed SIP REFER may cause a new call directly between endpoints or through another B2BUA. That can remove the platform anchor, recording, policy or correlation. Do not enable it as a default CCaaS transfer path without proving signaling, media, recording, consent and failure semantics. SIP transfer techniques are described in [RFC 5589](https://www.rfc-editor.org/rfc/rfc5589.html), with [REFER](https://www.rfc-editor.org/rfc/rfc3515.html) and [Replaces](https://www.rfc-editor.org/rfc/rfc3891.html); a given product may implement a different control model. Conference focus/participant behavior is described in [RFC 4579](https://www.rfc-editor.org/rfc/rfc4579.html). These references do not themselves prove vendor interoperability.
 
+For an externally anchored leg, the external voice controller replaces the local B2BUA as executor for that leg; local interaction, queue and reservation ownership stays intact. A media stream is an audio path, not leg-control authority. The [adapter design](programmable-voice-adapters.md) defines command/event translation, stream constraints and fallback.
+
 ## Ownership by artifact
 
 | Artifact/state | Authoritative owner | Lifetime and recovery |

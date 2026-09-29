@@ -8,6 +8,7 @@ These are not gaps to fill with universal defaults. Record the chosen option, ow
 | Protected workload and objectives | node/AZ/region capacity, staffing, RTO/RPO and SLO budget | traffic trace, burst profile, benchmark, failure drill |
 | Tenant isolation tier | dedicated media/data/keys vs shared pools and cost | cross-tenant test, threat model, noisy-neighbor load |
 | Number ownership and carrier diversity | inbound failover/port rollback may be carrier-constrained | DID ledger, carrier contract and routed synthetic calls |
+| Per-route SIP versus external programmable control and audio stream | determines live leg owner, control API, recording provenance, stream failure fallback and cost | callback/stream protocol tests, two-way audio, transfer/recording proof, measured failure and route economics |
 | SIP edge/media products and versions | interop, licenses, topology, codec and recording behavior | SIP/SDP/RTP matrix and failure benchmarks |
 | Agent endpoint type and networks | WebRTC/TURN, native SIP, device/OS support | two-way audio/ICE and permission test matrix |
 | Queue and reservation authority | atomicity, lease/fence, partition behavior | concurrent routing and stale-owner rejection |

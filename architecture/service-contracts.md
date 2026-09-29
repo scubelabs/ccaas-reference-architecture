@@ -91,3 +91,7 @@ Additive fields are tolerated; required semantic changes get a new event/API ver
 | `GET /v1/usage?from=&to=` | metering | immutable fact references, rate version, watermark and tenant scope |
 
 The detailed state machines and failure behavior live in [customer journey/case](customer-journey-case.md), [automation](automation-ai-knowledge.md), [performance](performance-management.md) and [developer ecosystem](developer-platform.md). These endpoint shapes are illustrative; implementation requires a published schema and compatibility suite.
+
+## External voice and streaming adapter contract
+
+The [programmable voice adapter design](programmable-voice-adapters.md) adds authenticated provider callback ingress, a persistent event inbox, external call/stream ID mapping, asynchronous operation status, and a media-stream gateway. Normalize `provider.call_initiated/answered/leg_connected/ended`, `provider.operation_completed/failed`, `stream.started/gap/stopped/failed` and `provider.recording_available` into versioned facts without granting the provider write access to queue, reservation or metric state. An operation timeout is an unknown result; query by stable provider/operation mapping before reissuing originate, transfer or hangup. Provider callbacks and WebSocket messages are protocol interfaces with provider-specific authentication, ordering and payload limits, not public browser APIs.

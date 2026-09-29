@@ -5,7 +5,7 @@ A production-oriented **design reference** for a multi-tenant contact-center pla
 ## Read the system in layers
 
 1. [Capability map](architecture/capability-map.md), [coverage review](validation/coverage-review.md) and [component/service catalog](architecture/component-model.md) — product scope, gaps, logical boundaries and ownership.
-2. [Interaction ownership and handoffs](architecture/interaction-ownership.md), [logical voice topology](architecture/logical-architecture.md), [routing policy engine](architecture/routing-policy-engine.md), [call-leg ownership](architecture/call-leg-ownership.md) and [state ownership](architecture/state-ownership.md) — creation, assignment, management, eligibility, reservations, signaling and media authority.
+2. [Interaction ownership and handoffs](architecture/interaction-ownership.md), [logical voice topology](architecture/logical-architecture.md), [programmable voice and stream adapters](architecture/programmable-voice-adapters.md), [routing policy engine](architecture/routing-policy-engine.md), [call-leg ownership](architecture/call-leg-ownership.md) and [state ownership](architecture/state-ownership.md) — creation, assignment, management, eligibility, reservations, signaling and media authority.
 3. [Service contracts and endpoints](architecture/service-contracts.md) — illustrative API/event contracts, idempotency and versioning.
 4. [Administration, supervisor and agent](architecture/admin-supervisor-agent.md), [digital/outbound](architecture/digital-outbound.md), [customer profile/case/journey](architecture/customer-journey-case.md), [automation/knowledge/AI](architecture/automation-ai-knowledge.md), [recording/transcription](architecture/recording-transcription-quality.md), [data/reporting/WFM](architecture/data-reporting-wfm.md), [performance/quality](architecture/performance-management.md) and [developer ecosystem](architecture/developer-platform.md).
 5. [Inbound call](call-flows/inbound-voice.md), [transfer/conference/hold scenarios](call-flows/feature-scenarios.md) and [cross-channel flows](call-flows/omnichannel-and-supervisor.md).
@@ -36,7 +36,7 @@ At intake, the **interaction service creates the canonical contact** after chann
 | Concern | Detailed design |
 |---|---|
 | Routing/agent state | [ACD](architecture/acd-routing.md), [agent state machine](architecture/agent-state-machine.md), [state ownership](architecture/state-ownership.md) |
-| Voice/carriers | [multi-carrier](architecture/multi-carrier-routing.md), [inbound flow](call-flows/inbound-voice.md) |
+| Voice/carriers | [multi-carrier](architecture/multi-carrier-routing.md), [programmable voice and media streams](architecture/programmable-voice-adapters.md), [inbound flow](call-flows/inbound-voice.md) |
 | Multi-region/HA | [region ownership](architecture/multi-region.md), [HA strategy](reliability/ha-strategy.md), [failure matrix](reliability/failure-matrix.md), [degradation/DR](reliability/degradation-and-dr.md) |
 | Operations | [observability](observability/observability-architecture.md), [capacity](capacity/capacity-planning.md), [acceptance](validation/architecture-acceptance.md) |
 | Security | [trust boundaries](security/security-boundaries.md), [privacy controls](security/privacy-controls.md) |
