@@ -36,3 +36,5 @@ For each service: who owns writes; what is the source of truth; which endpoint/e
 8. Reporting receives a late transfer event; historical revision and as-of watermark explain the change.
 9. WFM schedule changes while agent has an active voice leg; adherence and routability remain independently correct.
 10. Carrier pilot DID reroute fails; rollback of new admission and in-flight call accounting is demonstrated.
+
+For detailed skill/proficiency/attribute routing, transfer, conference and leg-failure gates, see [routing and leg acceptance](routing-and-leg-acceptance.md).

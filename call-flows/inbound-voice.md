@@ -59,3 +59,8 @@ Call teardown should generate idempotent finalization events for agent state, qu
 ## Correlation requirement
 
 Every phase should preserve `interaction_id` even when SIP Call-IDs or media UUIDs change across B2BUA boundaries. This is the foundation for end-to-end troubleshooting.
+
+
+## Feature continuation
+
+This base flow ends at an agent bridge. [Worked scenarios](feature-scenarios.md) cover hold, mute, blind/attended transfer, consult, conference, supervisor intervention, queue transfer, callback and partial failures. [Leg ownership](../architecture/call-leg-ownership.md) identifies the authority for each SIP dialog, media bridge, queue episode, assignment and recording segment.

@@ -91,3 +91,5 @@ A possible voice mapping is Kamailio-class proxy, FreeSWITCH-class B2BUA/media, 
 | Release/platform operations | service registry, deployment inventory, config drift, SLO/incident/change management and cost attribution |
 
 These can be integrated or delegated to external products. The architecture still assigns an owner for policy, data classification, failure behavior and audit at each boundary.
+
+The [routing policy engine](routing-policy-engine.md) defines eligibility and ranking contracts. [Call-leg ownership](call-leg-ownership.md) separates interaction, SIP dialog, media bridge, participant and recording authority.

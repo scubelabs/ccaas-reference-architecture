@@ -113,3 +113,8 @@ The routing design must cover worker crash after reservation, agent disconnect a
 ## Metrics
 
 At minimum observe routing-decision latency, reservation conflicts, offer/accept/reject/timeout rates, stale reservations, queue depth/age, agent idle distribution, routing retries, duplicate/idempotent replays, and time from reservation to media connection.
+
+
+## Detailed policy contract
+
+The [routing policy engine](routing-policy-engine.md) specifies direct, IVR, skill, proficiency, attribute, priority, affinity, geographic, capacity, outbound and digital routing; hard constraints vs soft ranking; atomic reserve/fence; fallback and fairness; a worked candidate selection; and the decision trace. [Leg ownership](call-leg-ownership.md) explains what happens after an agent offer reaches signaling/media.
