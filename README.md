@@ -1,6 +1,17 @@
 # CCaaS Reference Architecture
 
+> **SCubeLabs ecosystem** · [Platform](https://github.com/scubelabs/scubelabs) · [Architecture](https://github.com/scubelabs/ccaas-reference-architecture) · [Domain Model](https://github.com/scubelabs/ccaas-domain-model) · [Mini ACD](https://github.com/scubelabs/carrier-grade-mini-acd) · [SIP Lab](https://github.com/scubelabs/sip-troubleshooting-lab) · [VoxOne](https://github.com/scubelabs/voxone-showcase)
+
+> **Role:** end-to-end architecture authority · **Maturity:** design reference · **Evidence:** architecture/acceptance artifacts; deployed production behavior is not claimed
+
 A production-oriented **design reference** for a multi-tenant contact-center platform: carrier voice and WebRTC, digital channels, IVR, ACD, agent and supervisor workspaces, administration, recording, transcription, quality, reporting, workforce management, outbound/callback, security, resilience and migration. It is a portfolio architecture, not deployed software or a claim of carrier-grade certification.
+
+## Role in the SCubeLabs platform
+
+This repository is the **system architecture authority** for the public engineering surface. It defines component boundaries, state ownership, contracts, deployment topology, failure behavior, data-store roles and acceptance criteria that implementation repositories can trace back to.
+
+It is intentionally technology-aware but not technology-captive: logical ownership comes before product selection, and an architecture statement is not treated as implementation or production evidence.
+
 
 ## Read the system in layers
 
