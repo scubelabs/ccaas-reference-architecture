@@ -10,7 +10,7 @@ A production-oriented **design reference** for a multi-tenant contact-center pla
 4. [Administration, supervisor and agent](architecture/admin-supervisor-agent.md), [digital/outbound](architecture/digital-outbound.md), [recording/transcription/QM](architecture/recording-transcription-quality.md), [data/reporting/WFM](architecture/data-reporting-wfm.md).
 5. [Call flows](call-flows/inbound-voice.md) and [cross-channel flows](call-flows/omnichannel-and-supervisor.md).
 6. [Reliability](reliability/degradation-and-dr.md), [security/privacy](security/privacy-controls.md), [capacity](capacity/capacity-planning.md) and [observability](observability/observability-architecture.md).
-7. [Migration strategy](migration/migration-strategy.md) and [acceptance matrix](validation/architecture-acceptance.md) — how to prove and cut over a real implementation.
+7. [Migration strategy](migration/migration-strategy.md), [acceptance matrix](validation/architecture-acceptance.md) and [open deployment decisions](decisions/OPEN-DECISIONS.md) — how to prove and cut over a real implementation.
 
 ## Architecture at a glance
 
