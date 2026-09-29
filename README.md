@@ -1,107 +1,47 @@
 # CCaaS Reference Architecture
 
-> A production-oriented reference architecture for modern Contact Center as a Service platforms.
+A production-oriented **design reference** for a multi-tenant contact-center platform: carrier voice and WebRTC, digital channels, IVR, ACD, agent and supervisor workspaces, administration, recording, transcription, quality, reporting, workforce management, outbound/callback, security, resilience and migration. It is a portfolio architecture, not deployed software or a claim of carrier-grade certification.
 
-## Purpose
+## Read the system in layers
 
-A contact center is more than an ACD. It is a distributed real-time platform spanning carrier connectivity, signaling, media, IVR, routing, agent state, digital channels, data, integrations, observability, security, and business continuity.
+1. [Component and service catalog](architecture/component-model.md) — logical boundaries, ownership and experience surfaces.
+2. [Logical voice topology](architecture/logical-architecture.md) and [state ownership](architecture/state-ownership.md) — signaling, media, control and data, with reservation authority.
+3. [Service contracts and endpoints](architecture/service-contracts.md) — illustrative API/event contracts, idempotency and versioning.
+4. [Administration, supervisor and agent](architecture/admin-supervisor-agent.md), [digital/outbound](architecture/digital-outbound.md), [recording/transcription/QM](architecture/recording-transcription-quality.md), [data/reporting/WFM](architecture/data-reporting-wfm.md).
+5. [Call flows](call-flows/inbound-voice.md) and [cross-channel flows](call-flows/omnichannel-and-supervisor.md).
+6. [Reliability](reliability/degradation-and-dr.md), [security/privacy](security/privacy-controls.md), [capacity](capacity/capacity-planning.md) and [observability](observability/observability-architecture.md).
+7. [Migration strategy](migration/migration-strategy.md) and [acceptance matrix](validation/architecture-acceptance.md) — how to prove and cut over a real implementation.
 
-This repository documents those domains as an integrated architecture and makes component ownership, state, scaling boundaries, and failure modes explicit.
-
-## Logical architecture
+## Architecture at a glance
 
 ```mermaid
 flowchart TB
-    PSTN[PSTN / Customers] --> CA[Carrier A]
-    PSTN --> CB[Carrier B]
-    CA --> EDGE[SIP Edge / SBC Layer]
-    CB --> EDGE
-    EDGE --> SIG[Signaling Tier]
-    SIG --> MEDIA[Media / IVR Tier]
-    MEDIA --> ACD[ACD & Routing Services]
-    ACD --> STATE[(Real-time State)]
-    ACD --> AGENT[Agent Platform]
-    AGENT --> WEBRTC[WebRTC / Agent Endpoint]
-    ACD --> DATA[(Interaction Data)]
-    MEDIA --> DATA
-    SIG -. telemetry .-> OBS[Observability Platform]
-    MEDIA -. telemetry .-> OBS
-    ACD -. telemetry .-> OBS
+  Channels["Carrier voice / WebRTC / digital"] --> Edge["Channel edges and adapters"]
+  Edge --> Runtime["Media, IVR and interaction runtime"]
+  Runtime --> Control["Queue, routing and agent capacity"]
+  Control --> Experience["Agent and supervisor workspaces"]
+  Admin["Identity and published configuration"] --> Runtime
+  Admin --> Control
+  Runtime --> Evidence["Recording, events and diagnostics"]
+  Control --> Evidence
+  Evidence --> Insight["Reporting, WFM, QM and analytics"]
 ```
 
-## Architecture domains
+The four planes are **signaling**, **media**, **control** and **data/insight**. Logical service separation does not demand one microservice per box. One service owns each mutable state. An interaction carries a stable platform id across SIP Call-IDs, media legs, queue episodes, assignments and recordings. Real-time routing never depends on a reporting query; policy-required recording and audit are explicit exceptions to a broad “degrade gracefully” rule.
 
-| Domain | Responsibilities |
+## Domain index
+
+| Concern | Detailed design |
 |---|---|
-| Carrier & PSTN | number ingress, origination/termination, carrier diversity |
-| SIP edge / SBC | trust boundary, interop, security, topology control |
-| Signaling tier | SIP routing, location, policy, load distribution |
-| Media tier | RTP, prompts, DTMF, conferencing, recording, transcoding |
-| IVR / orchestration | self-service flows and application integration |
-| ACD / routing | queues, skills, priorities, routing decisions |
-| Agent state | presence, availability, capacity, concurrency |
-| Agent platform | call control, desktop integration, WebRTC |
-| Digital channels | chat/messaging/email interaction routing |
-| Data platform | interaction records, configuration, analytics/events |
-| Observability | metrics, logs, traces, SIP/media telemetry |
-| Security/compliance | identity, encryption, audit, data boundaries |
-| HA / DR | redundancy, failure isolation, recovery and regional continuity |
+| Routing/agent state | [ACD](architecture/acd-routing.md), [agent state machine](architecture/agent-state-machine.md), [state ownership](architecture/state-ownership.md) |
+| Voice/carriers | [multi-carrier](architecture/multi-carrier-routing.md), [inbound flow](call-flows/inbound-voice.md) |
+| Multi-region/HA | [region ownership](architecture/multi-region.md), [HA strategy](reliability/ha-strategy.md), [failure matrix](reliability/failure-matrix.md), [degradation/DR](reliability/degradation-and-dr.md) |
+| Operations | [observability](observability/observability-architecture.md), [capacity](capacity/capacity-planning.md), [acceptance](validation/architecture-acceptance.md) |
+| Security | [trust boundaries](security/security-boundaries.md), [privacy controls](security/privacy-controls.md) |
+| Decisions | [plane separation](decisions/ADR-001-separate-signaling-media-control.md), [state/events](decisions/ADR-002-state-and-events.md), [config publication](decisions/ADR-003-configuration-publication.md), [recording policy](decisions/ADR-004-recording-policy.md) |
 
-## Four-plane model
+## Boundaries and evidence
 
-The reference architecture distinguishes:
+The documents distinguish **designed** from **implemented, lab-proven, load-proven, failure-proven and production-observed**. They do not assign universal SLOs, RTO/RPO, staffing levels, recording consent rules or PCI/HIPAA status. Those depend on business goals, jurisdiction, traffic profile, vendor contracts and measured tests. The [acceptance matrix](validation/architecture-acceptance.md) lists proof required before making operational claims.
 
-**Signaling plane** — SIP registration, routing, dialog establishment and teardown.
-
-**Media plane** — RTP/SRTP, prompts, recording, conferencing, transcoding and media services.
-
-**Control plane** — ACD decisions, agent state, workflow orchestration, configuration and APIs.
-
-**Data plane** — durable interaction data, events, reporting, analytics and audit records.
-
-Keeping these concerns explicit helps reason about independent scaling and failure behavior.
-
-## Repository structure
-
-```text
-.
-├── README.md
-├── architecture/
-│   ├── logical-architecture.md
-│   ├── component-model.md
-│   ├── state-ownership.md
-│   └── multi-region.md
-├── call-flows/
-├── reliability/
-│   ├── failure-matrix.md
-│   ├── ha-strategy.md
-│   └── disaster-recovery.md
-├── security/
-├── observability/
-├── capacity/
-└── decisions/
-```
-
-## Core design questions
-
-The documents in this repository are organized around questions such as:
-
-- Which service owns each piece of call, queue, agent, and configuration state?
-- Which components are in the signaling path versus the media path?
-- How does a platform survive a carrier, node, availability-zone, or regional failure?
-- What happens to established calls when control-plane services fail?
-- How are retries made idempotent so a customer is not routed twice?
-- How are agent state and queue state kept consistent under partial failure?
-- How can signaling and media tiers scale independently?
-- What telemetry is required to diagnose one interaction end-to-end?
-- What data must be isolated, encrypted, retained, or excluded for compliance?
-
-## Scope and claims
-
-This is a **reference architecture**, not a claim that one topology is correct for every organization. Specific implementations depend on traffic profile, regulatory obligations, carrier model, cloud/on-prem constraints, recovery objectives, latency requirements, and operational maturity.
-
-Technology-specific examples may use Kamailio, FreeSWITCH, WebRTC, Redis, PostgreSQL, Kubernetes, Prometheus, and Grafana, while the architectural concepts remain intentionally separable from individual products.
-
-## Status
-
-🚧 Architecture foundation under active development.
+Illustrative mappings may use Kamailio-class SIP routing, FreeSWITCH-class media, RTPengine-class relay, coturn-class TURN, relational durable state and an event backbone. Product choices require interoperability, licensing, security and failure testing. Contributions should state ownership, interface, idempotency, timeout, failure mode, reconciliation, telemetry, capacity and proof for any new component.

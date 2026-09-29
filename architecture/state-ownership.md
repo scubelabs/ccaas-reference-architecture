@@ -10,9 +10,9 @@ State ownership is one of the most consequential design decisions in a distribut
 | SIP dialog | tags, route set | session-scoped | SIP UA/B2BUA/proxy transaction-dialog layer |
 | Media session | RTP endpoints/codecs | session-scoped | media server |
 | Agent presence | logged in/offline | near-real-time | agent-state service |
-| Agent capacity | available/busy/concurrency | highly dynamic | agent-state/routing domain |
+| Agent capacity | available/busy/concurrency | highly dynamic | agent-state service; reservation authority serializes offers |
 | Queue membership | waiting interaction | highly dynamic, correctness-sensitive | ACD/queue domain |
-| Routing decision | selected agent/target | transactional/idempotent | routing domain |
+| Routing decision | selected agent/target | transactional/idempotent | routing service; offer authority commits reservation |
 | Interaction record | timestamps/disposition | durable | interaction-data service |
 | Configuration | queues/skills/policies | durable/versioned | configuration service |
 | Audit record | administrative changes | immutable/durable | audit/event domain |
@@ -66,3 +66,8 @@ For every state type the architecture should answer:
 8. Which operations must be idempotent?
 
 These questions will be applied to each major CCaaS subsystem as the reference architecture expands.
+
+
+## Extended ownership
+
+The [service catalog](component-model.md) identifies the owners of configuration, recording, transcript, WFM, QM, reporting and audit. The [contract model](service-contracts.md) defines version, fence, idempotency and event-envelope requirements. A cache or event projection can serve reads without becoming a second writer.

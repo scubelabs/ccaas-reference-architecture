@@ -147,3 +147,8 @@ Agent Session ID
 ```
 
 The exact identifiers differ by implementation, but an explicit correlation strategy is essential for troubleshooting distributed call flows.
+
+
+## Wider platform
+
+This diagram is the **inbound voice runtime**, not the entire CCaaS product. The [component model](component-model.md) adds tenant administration, digital/outbound, supervisor, recording/transcription, reporting, WFM, QM, integration and developer/operations surfaces. The [data model](data-reporting-wfm.md) joins their interactions without coupling analytics to live routing.
