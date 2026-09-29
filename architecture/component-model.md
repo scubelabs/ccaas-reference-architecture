@@ -94,6 +94,8 @@ These can be integrated or delegated to external products. The architecture stil
 
 The [routing policy engine](routing-policy-engine.md) defines eligibility and ranking contracts. [Call-leg ownership](call-leg-ownership.md) separates interaction, SIP dialog, media bridge, participant and recording authority.
 
+The [interaction ownership ledger](interaction-ownership.md) states which owner creates, queues, assigns, connects, controls and closes an episode, including transfer and crash recovery. The [data-store matrix](data-store-topology.md) maps every owner to its authoritative database or live state, read projections, HA and scaling behavior.
+
 ## Complete product map
 
 The [capability map](capability-map.md) groups customer profile, case/task, journey, flow/automation, knowledge, quality/performance, developer and commercial operations with the existing voice and workforce services. Their detailed ownership is in [customer journey/case](customer-journey-case.md), [automation/knowledge](automation-ai-knowledge.md), [performance](performance-management.md) and [developer platform](developer-platform.md). A catalog row does not imply the repository implements the service.

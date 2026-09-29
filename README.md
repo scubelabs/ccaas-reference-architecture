@@ -5,11 +5,11 @@ A production-oriented **design reference** for a multi-tenant contact-center pla
 ## Read the system in layers
 
 1. [Capability map](architecture/capability-map.md), [coverage review](validation/coverage-review.md) and [component/service catalog](architecture/component-model.md) — product scope, gaps, logical boundaries and ownership.
-2. [Logical voice topology](architecture/logical-architecture.md), [routing policy engine](architecture/routing-policy-engine.md), [call-leg ownership](architecture/call-leg-ownership.md) and [state ownership](architecture/state-ownership.md) — eligibility, proficiency, reservations, signaling and media authority.
+2. [Interaction ownership and handoffs](architecture/interaction-ownership.md), [logical voice topology](architecture/logical-architecture.md), [routing policy engine](architecture/routing-policy-engine.md), [call-leg ownership](architecture/call-leg-ownership.md) and [state ownership](architecture/state-ownership.md) — creation, assignment, management, eligibility, reservations, signaling and media authority.
 3. [Service contracts and endpoints](architecture/service-contracts.md) — illustrative API/event contracts, idempotency and versioning.
 4. [Administration, supervisor and agent](architecture/admin-supervisor-agent.md), [digital/outbound](architecture/digital-outbound.md), [customer profile/case/journey](architecture/customer-journey-case.md), [automation/knowledge/AI](architecture/automation-ai-knowledge.md), [recording/transcription](architecture/recording-transcription-quality.md), [data/reporting/WFM](architecture/data-reporting-wfm.md), [performance/quality](architecture/performance-management.md) and [developer ecosystem](architecture/developer-platform.md).
 5. [Inbound call](call-flows/inbound-voice.md), [transfer/conference/hold scenarios](call-flows/feature-scenarios.md) and [cross-channel flows](call-flows/omnichannel-and-supervisor.md).
-6. [Deployment blueprint](architecture/deployment-blueprint.md), [reliability](reliability/degradation-and-dr.md), [security/privacy](security/privacy-controls.md), [capacity](capacity/capacity-planning.md) and [observability](observability/observability-architecture.md).
+6. [Data stores, HA and scaling](architecture/data-store-topology.md), [deployment blueprint](architecture/deployment-blueprint.md), [reliability](reliability/degradation-and-dr.md), [security/privacy](security/privacy-controls.md), [capacity](capacity/capacity-planning.md) and [observability](observability/observability-architecture.md).
 7. [Build sequence](implementation/build-sequence.md), [migration strategy](migration/migration-strategy.md), [acceptance matrix](validation/architecture-acceptance.md), [routing/leg acceptance](validation/routing-and-leg-acceptance.md) and [open deployment decisions](decisions/OPEN-DECISIONS.md) — how to implement, prove and cut over.
 
 ## Architecture at a glance
@@ -28,6 +28,8 @@ flowchart TB
 ```
 
 The four planes are **signaling**, **media**, **control** and **data/insight**. Logical service separation does not demand one microservice per box. One service owns each mutable state. An interaction carries a stable platform id across SIP Call-IDs, media legs, queue episodes, assignments and recordings. Real-time routing never depends on a reporting query; policy-required recording and audit are explicit exceptions to a broad “degrade gracefully” rule.
+
+At intake, the **interaction service creates the canonical contact** after channel admission. The **queue owns waiting order**; the **router evaluates eligibility and ranking**; the **agent/offer authority atomically reserves capacity**; the **media or digital channel owner proves connection**; the interaction owner records the resulting assignment and terminal lifecycle. [The operational ledger](architecture/interaction-ownership.md) covers every handoff, transfer and failure. [The store matrix](architecture/data-store-topology.md) maps each authority to transactional storage, caches, event streams, analytics, HA and scaling.
 
 ## Domain index
 

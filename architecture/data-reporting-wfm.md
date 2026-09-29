@@ -2,6 +2,8 @@
 
 Real-time control stores, durable records, event journal, search and analytical warehouse have different semantics and workloads. Routing must not synchronously query a reporting warehouse. Reporting must not treat a transient queue cache as historical truth.
 
+The [data-store topology](data-store-topology.md) maps reporting's columnar warehouse, metric-definition authority, search/live projections, event log and source transactional outboxes to HA and scaling boundaries. The [interaction handoff ledger](interaction-ownership.md) defines which operational owners produce each source fact.
+
 ## Canonical entities and keys
 
 | Entity | Identity / authority | Important relationships |

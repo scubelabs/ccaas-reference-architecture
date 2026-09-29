@@ -2,6 +2,8 @@
 
 This turns logical services into a candidate deployment topology. It is a **reference**, not a cloud bill of materials or measured HA claim. Product selection, sizing, network policy and RTO/RPO come from the [open decisions](../decisions/OPEN-DECISIONS.md) and [capacity tests](../capacity/capacity-planning.md).
 
+The [store-by-owner design](data-store-topology.md) specifies candidate database technologies, command authority versus cache, replication, backup, region fencing, and scale units. [Interaction ownership](interaction-ownership.md) specifies the control-plane handoffs that those stores must preserve.
+
 ```mermaid
 flowchart TB
   C["Carriers and customer channels"] --> E["Regional edge: SBC/proxy, API ingress"]
