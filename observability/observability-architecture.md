@@ -117,3 +117,14 @@ Root cause + blast radius
 ```
 
 This architecture is designed so an engineer can move from a customer interaction identifier to packet-level evidence without manually guessing which nodes handled the call.
+
+
+## Interaction timeline and evidence quality
+
+A case view should join customer ingress, carrier route decision, SIP transaction/dialogs, SDP/ICE negotiation, media-leg connection, RTP observations, IVR steps, queue episodes, reservation/offer, agent answer, recording segment manifest, transcript job, disposition, terminal event and report projection watermark. Each step carries observed timestamp, source component, result, config/policy version and correlation ids. Label inferred transitions separately; a 200 OK is not proof of bidirectional audio, and a recording-start command is not proof of durable audio.
+
+Telemetry pipelines have sampling and privacy constraints. Preserve unsampled error/critical lifecycle events where policy permits; bound packet capture and redact credentials/PII. A diagnostic bundle should state missing sources, clock skew and retention gaps. For WebRTC endpoints, candidate-pair and inbound/outbound RTP stats can add evidence, but browser stats still need interpretation and an end-to-end audio test. See the [W3C WebRTC statistics specification](https://www.w3.org/TR/webrtc-stats/).
+
+## Operations and alert routing
+
+Alert on customer-visible SLO burn and safety invariants (duplicate offer, mandatory recording failure, unowned queue, config drift), not only node CPU. Every alert links to a runbook with owner, impacted tenant/region, mitigation, rollback, reconciliation and evidence query. Synthetic tests use dedicated identities and report their complete route. An observability outage has its own meta-monitoring and does not imply calls are healthy.

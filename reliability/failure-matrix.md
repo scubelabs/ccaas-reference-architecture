@@ -53,6 +53,7 @@ Without an idempotency key such as `interaction-id + routing-attempt`, a retry c
 
 Failover is useful only if surviving infrastructure has enough capacity to absorb displaced traffic. Capacity planning should therefore model at least N-1 node/AZ conditions and, where required, regional DR load rather than only steady-state utilization.
 
-## Next expansion
+## Detailed scenarios and proof
 
-Each row will evolve into a failure scenario containing detection thresholds, state implications, recovery sequence, customer impact, observability signals, and test procedure.
+The [degradation and DR matrix](degradation-and-dr.md) adds recording, transcription, identity, configuration, CRM, event and reporting failures. The [acceptance matrix](../validation/architecture-acceptance.md) defines evidence for failure drills. Numerical thresholds and recovery objectives must be selected and measured for a concrete deployment.
+
