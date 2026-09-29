@@ -38,3 +38,17 @@ For each service: who owns writes; what is the source of truth; which endpoint/e
 10. Carrier pilot DID reroute fails; rollback of new admission and in-flight call accounting is demonstrated.
 
 For detailed skill/proficiency/attribute routing, transfer, conference and leg-failure gates, see [routing and leg acceptance](routing-and-leg-acceptance.md).
+
+## Additional product gates
+
+| Capability | Minimum proof |
+|---|---|
+| Customer profile and case | ambiguous identity resolution, cross-tenant isolation, merge/split lineage, case SLA and external sync outage |
+| Journey and notification | consent withdrawn between scheduling/delivery, contact cap, duplicate trigger and channel-switch handoff |
+| Flow authoring and bot | graph validation, bounded loop/tool timeout, pinned version, human fallback and prompt-injection denial |
+| Knowledge/assist | permission-filtered retrieval, article citation/version, no-answer behavior, feedback and model rollback |
+| Performance/QM/surveys | rubric calibration, evidence revision, dispute, small-sample disclosure, survey dedupe and bias review |
+| Developer ecosystem | scoped app install/revoke, webhook replay/signature, quota, sandbox isolation and version compatibility |
+| Usage/entitlement | leg-level correction, transfer/conference reconciliation, quota transition and billing dispute trace |
+
+The [build sequence](../implementation/build-sequence.md) orders these gates. Capability coverage is not evidence of implementation.

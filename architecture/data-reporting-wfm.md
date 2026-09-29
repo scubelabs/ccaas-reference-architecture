@@ -64,3 +64,7 @@ Observe agent state transitions from the authoritative agent-state domain, compa
 ## Reporting and retention
 
 RBAC/ABAC applies at row and field level, including export and scheduled report delivery. Record metric definitions, query version, source watermark and report generation time. Bound expensive queries and isolate compute. Apply retention/legal hold to interaction facts, audio, transcript, audit, backups and exports separately; deletion must traverse derived indexes and document exceptions. Regional data residency requires explicit pipeline and vendor placement, not just a storage-region setting.
+
+## Cross-lifecycle data
+
+`customer_id` is a verified profile link; `case_id` persists across contacts; `journey_id` persists across actions; `conversation_id` groups channel messages; `interaction_id` is one contact episode. Their authorities and merge/split provenance are specified in [customer journey and case](customer-journey-case.md). [Performance and quality](performance-management.md) consumes governed facts and evidence revisions; it cannot redefine routing state or overwrite agent history.

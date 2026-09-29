@@ -74,3 +74,20 @@ Events use `event_id`, `aggregate_id`, `aggregate_version`, `schema_version`, `o
 ## Versioning and compatibility
 
 Additive fields are tolerated; required semantic changes get a new event/API version. A consumer must not infer new meanings from an old event name. Pin configuration per interaction/flow. Contract tests cover old producer/new consumer and new producer/old consumer across rolling deployments; schema registry or CI checks reject incompatible changes.
+
+## Customer, automation, workforce and developer API additions
+
+| Endpoint or event family | Owning service | Required guard |
+|---|---|---|
+| `GET /v1/customers/{id}`, `POST /v1/customers/identity-links` | profile/identity | field ABAC, provenance, verified linkage and merge audit |
+| `POST /v1/cases`, `PATCH /v1/cases/{id}`, `POST /v1/cases/{id}/tasks` | case/work item | tenant, expected version, SLA calendar and idempotency |
+| `POST /v1/journeys/{id}/triggers`, `POST /v1/journeys/{id}/cancel` | journey | consent/quiet-hour/contact cap, step ledger and dedupe |
+| `POST /v1/admin/flows/{version}/simulate|validate|publish` | flow config/runtime | graph/dependency/policy validation, approval and canary |
+| `GET /v1/knowledge/search`, `POST /v1/assist/{interaction_id}/feedback` | knowledge/assist | article scope/version and no unauthorized raw transcript |
+| `POST /v1/qm/evaluations`, `POST /v1/qm/evaluations/{id}/disputes` | quality | evidence/rubric version, evaluator scope and history |
+| `POST /v1/wfm/forecasts/{id}/publish`, `POST /v1/wfm/schedules/{id}/publish` | workforce | assumptions, labor policy, expected version and audit |
+| `GET /v1/performance/scorecards?as_of=...`, `POST /v1/surveys/dispatch` | performance/survey | metric version, sample sufficiency, consent and dedupe |
+| `POST /v1/developer/apps`, `POST /v1/integrations/{id}/webhooks` | developer/integration | scopes, egress, signing, quotas, secret isolation and review |
+| `GET /v1/usage?from=&to=` | metering | immutable fact references, rate version, watermark and tenant scope |
+
+The detailed state machines and failure behavior live in [customer journey/case](customer-journey-case.md), [automation](automation-ai-knowledge.md), [performance](performance-management.md) and [developer ecosystem](developer-platform.md). These endpoint shapes are illustrative; implementation requires a published schema and compatibility suite.

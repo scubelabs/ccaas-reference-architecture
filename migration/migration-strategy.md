@@ -42,3 +42,7 @@ Each wave has named decision owner, preflight checklist, tested rollback, observ
 ## Evidence artifacts
 
 Keep configuration versions, carrier order/port confirmations, test call IDs and packet/media evidence, synthetic results, canary metrics, capacity/drill reports, recording manifests, report variance with explanation, security approvals, rollback timestamps and customer impact. A migration wave is not “done” while a critical variance or missing recording remains unexplained.
+
+## Product-domain migration beyond telephony
+
+Migrate customer identity links, consent/preference records, open cases/tasks and SLA clocks with provenance; preserve old/new ids and split/merge reversibility. Shadow journey triggers and outbound contact caps before activation to avoid duplicate outreach. Import approved knowledge articles with permissions, locale and effective versions; compare bot/flow outcomes in simulation. Run parallel QM rubrics, WFM schedules/adherence and report metrics long enough to explain variances. Partner/webhook cutover uses source event ids and dedupe so both platforms do not send the same customer message or callback. Decommission only after legal holds, recordings/transcripts, exports, usage/billing and support access are reconciled. See the [capability map](../architecture/capability-map.md).

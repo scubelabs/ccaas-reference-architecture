@@ -4,13 +4,13 @@ A production-oriented **design reference** for a multi-tenant contact-center pla
 
 ## Read the system in layers
 
-1. [Component and service catalog](architecture/component-model.md) — logical boundaries, ownership and experience surfaces.
+1. [Capability map](architecture/capability-map.md), [coverage review](validation/coverage-review.md) and [component/service catalog](architecture/component-model.md) — product scope, gaps, logical boundaries and ownership.
 2. [Logical voice topology](architecture/logical-architecture.md), [routing policy engine](architecture/routing-policy-engine.md), [call-leg ownership](architecture/call-leg-ownership.md) and [state ownership](architecture/state-ownership.md) — eligibility, proficiency, reservations, signaling and media authority.
 3. [Service contracts and endpoints](architecture/service-contracts.md) — illustrative API/event contracts, idempotency and versioning.
-4. [Administration, supervisor and agent](architecture/admin-supervisor-agent.md), [digital/outbound](architecture/digital-outbound.md), [recording/transcription/QM](architecture/recording-transcription-quality.md), [data/reporting/WFM](architecture/data-reporting-wfm.md).
+4. [Administration, supervisor and agent](architecture/admin-supervisor-agent.md), [digital/outbound](architecture/digital-outbound.md), [customer profile/case/journey](architecture/customer-journey-case.md), [automation/knowledge/AI](architecture/automation-ai-knowledge.md), [recording/transcription](architecture/recording-transcription-quality.md), [data/reporting/WFM](architecture/data-reporting-wfm.md), [performance/quality](architecture/performance-management.md) and [developer ecosystem](architecture/developer-platform.md).
 5. [Inbound call](call-flows/inbound-voice.md), [transfer/conference/hold scenarios](call-flows/feature-scenarios.md) and [cross-channel flows](call-flows/omnichannel-and-supervisor.md).
-6. [Reliability](reliability/degradation-and-dr.md), [security/privacy](security/privacy-controls.md), [capacity](capacity/capacity-planning.md) and [observability](observability/observability-architecture.md).
-7. [Migration strategy](migration/migration-strategy.md), [acceptance matrix](validation/architecture-acceptance.md), [routing/leg acceptance](validation/routing-and-leg-acceptance.md) and [open deployment decisions](decisions/OPEN-DECISIONS.md) — how to prove and cut over a real implementation.
+6. [Deployment blueprint](architecture/deployment-blueprint.md), [reliability](reliability/degradation-and-dr.md), [security/privacy](security/privacy-controls.md), [capacity](capacity/capacity-planning.md) and [observability](observability/observability-architecture.md).
+7. [Build sequence](implementation/build-sequence.md), [migration strategy](migration/migration-strategy.md), [acceptance matrix](validation/architecture-acceptance.md), [routing/leg acceptance](validation/routing-and-leg-acceptance.md) and [open deployment decisions](decisions/OPEN-DECISIONS.md) — how to implement, prove and cut over.
 
 ## Architecture at a glance
 
@@ -42,6 +42,8 @@ The four planes are **signaling**, **media**, **control** and **data/insight**. 
 
 ## Boundaries and evidence
 
-The documents distinguish **designed** from **implemented, lab-proven, load-proven, failure-proven and production-observed**. They do not assign universal SLOs, RTO/RPO, staffing levels, recording consent rules or PCI/HIPAA status. Those depend on business goals, jurisdiction, traffic profile, vendor contracts and measured tests. The [acceptance matrix](validation/architecture-acceptance.md) lists proof required before making operational claims.
+This repository contains architecture, not an executable CCaaS. The documents distinguish **designed** from **implemented, lab-proven, load-proven, failure-proven and production-observed**. They do not assign universal SLOs, RTO/RPO, staffing levels, recording consent rules or PCI/HIPAA status. Those depend on business goals, jurisdiction, traffic profile, vendor contracts and measured tests. The [acceptance matrix](validation/architecture-acceptance.md) lists proof required before making operational claims.
 
 Illustrative mappings may use Kamailio-class SIP routing, FreeSWITCH-class media, RTPengine-class relay, coturn-class TURN, relational durable state and an event backbone. Product choices require interoperability, licensing, security and failure testing. Contributions should state ownership, interface, idempotency, timeout, failure mode, reconciliation, telemetry, capacity and proof for any new component.
+
+A worked [cross-channel journey](call-flows/cross-channel-journey.md) joins profile verification, case, callback, voice and survey without collapsing their state owners.

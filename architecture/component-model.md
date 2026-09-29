@@ -93,3 +93,9 @@ A possible voice mapping is Kamailio-class proxy, FreeSWITCH-class B2BUA/media, 
 These can be integrated or delegated to external products. The architecture still assigns an owner for policy, data classification, failure behavior and audit at each boundary.
 
 The [routing policy engine](routing-policy-engine.md) defines eligibility and ranking contracts. [Call-leg ownership](call-leg-ownership.md) separates interaction, SIP dialog, media bridge, participant and recording authority.
+
+## Complete product map
+
+The [capability map](capability-map.md) groups customer profile, case/task, journey, flow/automation, knowledge, quality/performance, developer and commercial operations with the existing voice and workforce services. Their detailed ownership is in [customer journey/case](customer-journey-case.md), [automation/knowledge](automation-ai-knowledge.md), [performance](performance-management.md) and [developer platform](developer-platform.md). A catalog row does not imply the repository implements the service.
+
+Physical placement, state stores, network boundaries and failure-domain mapping are in the [deployment blueprint](deployment-blueprint.md). The [coverage review](../validation/coverage-review.md) distinguishes design scope from runnable product evidence.

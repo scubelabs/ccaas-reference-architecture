@@ -25,3 +25,7 @@ A callback promise records customer number/verification, consent, requested wind
 ## Failure and reporting
 
 Provider down: buffer within contractual limits, show delivery unknown, replay by provider id. Agent gateway down: task remains owned by queue/lease until reconciliation. Campaign pause: stop new admission and honor in-flight attempts. Reporting distinguishes initiated, delivered, accepted, connected, abandoned, failed and unknown; use event-time corrections and explicit denominators.
+
+## Rich collaboration channels
+
+Video, screen share and co-browse are separate media/collaboration adapters with participant consent, device permissions, session-scoped authorization and explicit capture policy. Co-browse should mask sensitive fields and restrict remote control; screen recording is a different data class from call audio and has its own retention and access. A transition from chat/voice to video preserves interaction/case correlation, but creates new media participants and quality metrics. These capabilities are conditional, not implied by the base voice topology.
